@@ -8,11 +8,11 @@
                     </slot>
                 </header>
 
-                <form>
+                <form @submit.prevent="handleSubmit">
                     <section class="modal-body">
-                        <input type="text" v-model="name">
-                        <input type="text" v-model="desc">
-                        <input type="number" v-model="price">
+                        <input type="text" v-model="name" required>
+                        <input type="text" v-model="desc" required>
+                        <input type="number" v-model.number="price" required>
                     </section>
 
                     <footer class="modal-footer">

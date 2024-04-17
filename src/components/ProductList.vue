@@ -56,6 +56,21 @@ export default {
   methods:{
     addProduct(newProduct){
       this.products.push(newProduct);
+      alert("New product successfully added. ");
+    },
+
+    editProduct(product){
+      let id = product.id;
+      delete product.id;
+      
+      let index = this.products.map(e => e.name).indexOf(product.name);
+
+      if(index != id && index != -1){
+        alert("Product name for " + product.name + " is already exist");
+        return;
+      }
+      this.products[id] = product;
+      alert("Edit saved");
     },
 
     deleteProduct(index){
@@ -67,6 +82,7 @@ export default {
       }
     },
 
+// --------------------------- open and close modal methods --------------------------- \\
     openEditModal(index, product){
       this.showEdit = true;
 
@@ -76,13 +92,9 @@ export default {
     },
 
     closeEditModal(product){
-      let id = product.id;
-      delete product.id;
-      console.log(product);
-
-      this.products[id] = product
       this.showEdit = false;
-      alert("Edit saved");
+      this.editProduct(product);
+      
     },
 
     openAddModal(){
@@ -90,9 +102,10 @@ export default {
     },
 
     closeAddModal(newProduct){
-      this.products.push(newProduct);
       this.showAdd = false;
-      alert("New product successfully added. ");
+      // call addProduct method
+      this.addProduct(newProduct);
+      
     }
   }
 }
