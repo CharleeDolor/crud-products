@@ -4,7 +4,7 @@
             <div class="modal">
                 <header class="modal-header">
                     <slot name="header">
-                        Edit Product
+                        Add Product
                     </slot>
                 </header>
 
@@ -29,17 +29,6 @@
 <script>
 export default {
     name: 'EditModal',
-    props: {
-        product: {
-            type: Object,
-        }
-    },
-
-    mounted() {
-        this.name = this.product.name;
-        this.desc = this.product.desc;
-        this.price = this.product.price;
-    },
 
     data() {
         return {
@@ -50,13 +39,12 @@ export default {
     },
     methods: {
         close() {
-            let editedProduct = {
-                id: this.product.id,
+            let newProduct = {
                 name: this.name,
                 desc: this.desc,
                 price: this.price
             }
-            this.$emit('close', editedProduct);
+            this.$emit('close', newProduct);
         },
     },
 };

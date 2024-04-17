@@ -2,9 +2,14 @@
   <h1>Products</h1>
   <EditModal v-if="showEdit" 
     @close="closeEditModal"
-    :product="this.toEditProduct"
-  ></EditModal>
-  <button @click="toAdd">Add Product</button>
+    :product="this.toEditProduct">
+  </EditModal>
+
+  <AddModal v-if="showAdd"
+  @close="closeAddModal">
+  </AddModal>
+
+  <button @click="openAddModal">Add Product</button>
   <table>
     <thead>
       <th>Name</th>
@@ -28,14 +33,17 @@
 
 <script>
 import EditModal from '../components/EditModal.vue'
+import AddModal from '../components/AddModal.vue'
 export default {
   name: 'ProductList',
   components:{
-    EditModal
+    EditModal,
+    AddModal
   },
   data(){
     return {
       showEdit: false,
+      showAdd: false,
       toEditProduct: null,
       products: [
         {name: "product 1", desc: "description 1", price: 12},
@@ -76,9 +84,15 @@ export default {
       this.showEdit = false;
       alert("Edit saved");
     },
-    
-    toAdd(){
-      
+
+    openAddModal(){
+      this.showAdd = true;
+    },
+
+    closeAddModal(newProduct){
+      this.products.push(newProduct);
+      this.showAdd = false;
+      alert("New product successfully added. ");
     }
   }
 }
