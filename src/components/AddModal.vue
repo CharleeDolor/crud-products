@@ -6,21 +6,37 @@
                     <slot name="header">
                         Add Product
                     </slot>
-                    <button type="button" class="btn-close" @click="close" aria-label="Close modal">
+                    <button type="button" class="btn-close" @click="closeDefault" aria-label="Close modal">
                         x
                     </button>
                 </header>
 
-                <form ref="form" @submit.prevent="handleSubmit">
+                <form ref="form" @submit.prevent="animateSave">
                     <section class="modal-body">
-                        <input type="text" v-model="name" required>
-                        <input type="text" v-model="desc" required>
-                        <input type="number" v-model.number="price" required>
+                        <div class="modal-group">
+                            <label for="txtName">Name: </label>
+                            <span class="error" v-if="errName.length > 0">{{ errName }}</span>
+                            <input class="modal-field" id="txtName" type="text" v-model="name" required />
+                        </div>
+
+                        <div class="modal-group">
+                            <label for="txtDesc">Description:</label>
+                            <span class="error" v-if="errDesc.length > 0">{{ errDesc }}</span>
+                            <input class="modal-field" id="txtDesc" type="text" v-model="desc" required />
+                        </div>
+
+                        <div class="modal-group">
+                            <label for="txtPrice">Price:</label>
+                            <span class="error" v-if="errPrice.length > 0">{{ errPrice }}</span>
+                            <input class="modal-field" type="number" id="txtPrice" v-model.number="price" required />
+                        </div>
+
                     </section>
 
                     <footer class="modal-footer">
                         <button type="button" class="btn-green" @click="animateSave">
-                            <span v-for="(letter, index) in saveText" :key="index" :class="{ 'jump': saveAnimated[index] }">{{ letter }}</span>
+                            <span v-for="(letter, index) in saveText" :key="index"
+                                :class="{ 'jump': saveAnimated[index] }">{{ letter }}</span>
                         </button>
                     </footer>
                 </form>
@@ -31,7 +47,7 @@
 
 <script>
 export default {
-    name: 'EditModal',
+    name: 'AddModal',
 
     data() {
         return {
@@ -39,7 +55,10 @@ export default {
             desc: '',
             price: 0,
             saveText: 'Save',
-            saveAnimated: [false, false, false, false] // Array to track which letters to animate
+            saveAnimated: [false, false, false, false], // Array to track which letters to animate
+            errName: '',
+            errDesc: '',
+            errPrice: '',
         }
     },
     methods: {
@@ -51,48 +70,81 @@ export default {
             }
             this.$emit('close', newProduct);
         },
-        handleSubmit() {
-            // Validate form manually
-            if (!this.$refs.form.checkValidity()) {
-                return false; // Prevent form submission
-            }
 
+        closeDefault() {
+            this.$emit('closeDefault');
+        },
+
+        animateSave() {
+            // Validate form manually
+            // if (!this.$refs.form.checkValidity()) {
+            //     return false; // Prevent form submission
+            // }
 
             // Animate the Save button
             this.saveAnimated = [false, false, false, false]; // Reset animation status
             setTimeout(() => {
                 this.saveAnimated = [true, true, true, true]; // Trigger animation
-                 // Your form submission logic here
+                    // Your form submission logic here
             }, 5000);
-        },
-        animateSave() {
-            // Animate the Save button
-            this.saveAnimated = [false, false, false, false];
-            this.saveAnimated = [true, true, true, true]; // Trigger animation // Reset animation status
-            setTimeout(() => {
-                let newProduct = {
+
+            let newProduct = {
                 name: this.name,
                 desc: this.desc,
                 price: this.price
             }
-            this.$emit('close', newProduct);
-                
-                
-            }, 1000);
-    
-        },
 
+            // check if a field is empty 
+            if (this.name == '' || this.desc == '' || this.price <= 0) {
+                // Load error message base on what field is empty
+                if (this.name == '') {
+                    this.errName = "Name is required";
+                } else {
+                    this.errName = "";
+                }
+
+                if (this.desc == '') {
+                    this.errDesc = "Description is required";
+                } else {
+                    this.errDesc = "";
+                }
+
+                if (this.price <= 0) {
+                    this.errPrice = "Price is invalid";
+                } else {
+                    this.errPrice = "";
+                }
+                return;
+            }
+            this.$emit('close', newProduct);
+
+
+        }
     },
 };
 </script>
 
 <style>
 @keyframes jumpAnimation {
-    0% { transform: translateY(0); }
-    25% { transform: translateY(-10px); }
-    50% { transform: translateY(0); }
-    75% { transform: translateY(-5px); }
-    100% { transform: translateY(0); }
+    0% {
+        transform: translateY(0);
+    }
+
+    25% {
+        transform: translateY(-10px);
+    }
+
+    50% {
+        transform: translateY(0);
+    }
+
+    75% {
+        transform: translateY(-5px);
+    }
+
+    100% {
+        transform: translateY(0);
+    }
 }
 
 .jump {
@@ -120,10 +172,12 @@ export default {
 .btn-green:hover span {
     transform: translateY(-50%);
 }
-.table{
+
+.table {
     display: flex;
     justify-content: center;
 }
+
 .modal-backdrop {
     position: fixed;
     top: 0;
@@ -166,6 +220,8 @@ export default {
 .modal-body {
     position: relative;
     padding: 20px 10px;
+    display: flex;
+    flex-direction: column;
 }
 
 .btn-close {
@@ -197,5 +253,8 @@ export default {
 .modal-fade-leave-active {
     transition: opacity .5s ease;
 }
+
+.error {
+    color: red;
+}
 </style>
- 

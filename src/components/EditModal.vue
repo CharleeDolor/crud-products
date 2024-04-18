@@ -10,9 +10,23 @@
 
                 <form @submit.prevent="handleSubmit">
                     <section class="modal-body">
-                        <input class="modal-field" type="text" v-model="name" required/>
-                        <input class="modal-field" type="text" v-model="desc" required/>
-                        <input class="modal-field" type="number" v-model.number="price" required/>
+                        <div class="modal-group">
+                            <label for="txtName">Name:</label>
+                            <input id="txtName" class="modal-field" type="text" v-model="name" required/>
+                        </div>
+
+                        <div class="modal-group">
+                            <label for="txtDesc">Description:</label>
+                            <input id="txtDesc" class="modal-field" type="text" v-model="desc" required/>
+                        </div>
+
+                        <div class="modal-group">
+                            <label for="txtPrice">Price:</label>
+                            <input id="txtPrice" class="modal-field" type="number" v-model.number="price" step="0.01" required/>
+                        </div>
+                        
+                        
+                        
                     </section>
 
                     <footer class="modal-footer">
@@ -106,6 +120,8 @@ export default {
 .modal-body {
     position: relative;
     padding: 20px 10px;
+    display: flex;
+    flex-direction: column;
 }
 
 .btn-close {

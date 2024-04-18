@@ -3,7 +3,7 @@
   <EditModal v-if="showEdit" @close="closeEditModal" :product="this.toEditProduct">
   </EditModal>
 
-  <AddModal v-if="showAdd" @close="closeAddModal">
+  <AddModal v-if="showAdd" @close="closeAddModal" @closeDefault="closeAddModalDefault">
   </AddModal>
                       
   <button @click="openAddModal">Add Product</button>
@@ -121,6 +121,10 @@ export default {
       // call addProduct method
       this.addProduct(newProduct);
 
+    },
+
+    closeAddModalDefault(){
+      this.showAdd = false;
     }
   }
 }

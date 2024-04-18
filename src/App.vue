@@ -31,6 +31,12 @@ td, th{
 }
 
 .modal-field {
-    margin: 1rem;
+}
+
+.modal-group {
+  margin: 1rem;
+  display: flex;
+  flex-direction: column;
+  align-items: start;
 }
 </style>
