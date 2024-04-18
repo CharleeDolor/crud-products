@@ -17,7 +17,7 @@
       </thead>
       <transition-group name="fade">
         <tr v-for="(product, index) in this.products" :key="product" @click="openEditModal(index, product)" class="item" >
-          <td>{{ product.name }}  placeholder="edit name"</td>
+          <td>{{ product.name }}</td>
           <td>{{ product.desc }}</td>
           <td>{{ product.price }}</td>
           <td v-on:click.stop="">
