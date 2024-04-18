@@ -5,26 +5,29 @@
 
   <AddModal v-if="showAdd" @close="closeAddModal" @closeDefault="closeAddModalDefault">
   </AddModal>
-                      
-  <button @click="openAddModal">Add Product</button>
-  <table>
-    <thead>
-      <th>Name</th>
-      <th>Description</th>
-      <th>Price</th>
-      <th>Action</th>
-    </thead>
-    <transition-group name="fade">
-      <tr v-for="(product, index) in this.products" :key="product.name" @click="openEditModal(index, product)">
-        <td>{{ product.name }}</td>
-        <td>{{ product.desc }}</td>
-        <td>{{ product.price }}</td>
-        <td v-on:click.stop="">
-          <button @click="deleteProduct(index)">Delete</button>
-        </td>
-      </tr>
-    </transition-group>
-  </table>
+
+  <div class="control-panel">
+    <button @click="openAddModal">Add Product</button>
+    <table>
+      <thead>
+        <th>Name</th>
+        <th>Description</th>
+        <th>Price</th>
+        <th>Action</th>
+      </thead>
+      <transition-group name="fade">
+        <tr v-for="(product, index) in this.products" :key="product" @click="openEditModal(index, product)" class="item">
+          <td>{{ product.name }}</td>
+          <td>{{ product.desc }}</td>
+          <td>{{ product.price }}</td>
+          <td v-on:click.stop="">
+            <button @click="deleteProduct(index)">Delete</button>
+          </td>
+        </tr>
+      </transition-group>
+    </table>
+  </div>
+
 
 </template>
 
@@ -54,14 +57,14 @@ export default {
   methods: {
     addProduct(newProduct) {
 
-      // check if new product name is an empty string
-      if(newProduct.name == ''){
-        // exit the function, this means that the user just click x button from header of modal
+      // check if new product name is already existing
+      let pos = this.products.findIndex(i => i.name.toLowerCase() == newProduct.name.toLowerCase());
+      if(pos > -1){
+        alert(newProduct.name + " already exists.");
         return;
       }
 
       this.products.push(newProduct);
-      // alert("New product successfully added. ");
     },
 
     editProduct(product) {
@@ -123,7 +126,7 @@ export default {
 
     },
 
-    closeAddModalDefault(){
+    closeAddModalDefault() {
       this.showAdd = false;
     }
   }
@@ -145,4 +148,23 @@ export default {
   opacity: 0;
 }
 
+.control-panel{
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  align-items: start;
+}
+
+button{
+  padding: 0.5rem;
+}
+
+div > button{
+  width: 50%;
+  border-radius: 10px;
+}
+
+.item{
+  cursor: pointer;
+}
 </style>

@@ -21,6 +21,11 @@ export default {
   text-align: center;
   color: #2c3e50;
   margin-top: 60px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  gap: 5rem;
 }
 table, th, td {
   border: 1px solid black;
@@ -28,9 +33,6 @@ table, th, td {
 }
 td, th{
   padding: 0.5rem;
-}
-
-.modal-field {
 }
 
 .modal-group {
