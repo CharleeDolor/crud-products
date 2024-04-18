@@ -6,24 +6,16 @@
                     <slot name="header">
                         Add Product
                     </slot>
+                    <button type="button" class="btn-close" @click="close" aria-label="Close modal">
+                        x
+                    </button>
                 </header>
 
                 <form ref="form" @submit.prevent="handleSubmit">
                     <section class="modal-body">
-                        <table>
-                            <th>
-                                <tr>
-                                    <td><h3>Name of Products</h3></td>
-                                    <td><h3>Description</h3></td>
-                                    <td><h3>Price</h3></td>
-                                </tr>
-                                <tr>
-                                    <td><input type="text" v-model="name" class="custom-input" required></td>
-                                    <td><input type="text" v-model="desc" class="custom-input" required></td>
-                                    <td><input type="number" v-model.number="price" class="custom-input" required></td>
-                                </tr>
-                            </th>
-                        </table>
+                        <input type="text" v-model="name" required>
+                        <input type="text" v-model="desc" required>
+                        <input type="number" v-model.number="price" required>
                     </section>
 
                     <footer class="modal-footer">
@@ -51,6 +43,15 @@ export default {
         }
     },
     methods: {
+        handleSubmit() {
+
+            // Validation for price
+            if (this.price <= 0) {
+                alert("Invalid Price");
+                return;
+            }
+            this.close();
+        },
         close() {
             let newProduct = {
                 name: this.name,
@@ -174,7 +175,6 @@ export default {
 .modal-body {
     position: relative;
     padding: 20px 10px;
-    
 }
 
 .btn-close {
@@ -206,20 +206,5 @@ export default {
 .modal-fade-leave-active {
     transition: opacity .5s ease;
 }
-
-.modal-body h3 {
-    margin-bottom: 10px; /* Add margin below headings */
-}
-
-.modal-body input {
-    margin-bottom: 30px; /* Add margin below input fields */
-    justify-content: space-between;
-}
-.custom-input {
-    height: 60px; /* Adjust the height as needed */
-    font-size: 20px;
-    border: none;
-}
-
 </style>
  
