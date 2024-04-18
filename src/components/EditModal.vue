@@ -30,7 +30,7 @@
                     </section>
 
                     <footer class="modal-footer">
-                        <input type="submit" value="Save" class="btn-green">
+                        <input type="submit" value="Save" class="btn-yellow">
                     </footer>
                 </form>
             </div>
@@ -137,7 +137,7 @@ export default {
     background: transparent;
 }
 
-.btn-green {
+.btn-yellow {
     color: white;
     background: #4AAE9B;
     border: 1px solid #4AAE9B;

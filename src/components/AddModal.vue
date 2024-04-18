@@ -28,7 +28,7 @@
                         <div class="modal-group">
                             <label for="txtPrice">Price:</label>
                             <span class="error" v-if="errPrice.length > 0">{{ errPrice }}</span>
-                            <input class="modal-field" type="number" id="txtPrice" v-model.number="price" required />
+                            <input class="modal-field" type="number" id="txtPrice" min="0" v-model.number="price" required />
                         </div>
 
                     </section>
