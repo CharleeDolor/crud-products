@@ -1,13 +1,13 @@
 <template>
   <h1>Products</h1>
-  <EditModal v-if="showEdit" @close="closeEditModal" :product="this.toEditProduct">
+  <EditModal v-if="showEdit" @close="closeEditModal" :product="this.toEditProduct" >
   </EditModal>
 
   <AddModal v-if="showAdd" @close="closeAddModal" @closeDefault="closeAddModalDefault">
   </AddModal>
 
   <div class="control-panel">
-    <button @click="openAddModal">Add Product</button>
+    <button @click="openAddModal"  class="add-btn">    Add Product</button>
     <table>
       <thead>
         <th>Name</th>
@@ -16,12 +16,12 @@
         <th>Action</th>
       </thead>
       <transition-group name="fade">
-        <tr v-for="(product, index) in this.products" :key="product" @click="openEditModal(index, product)" class="item">
+        <tr v-for="(product, index) in this.products" :key="product" @click="openEditModal(index, product)" class="item" >
           <td>{{ product.name }}</td>
           <td>{{ product.desc }}</td>
           <td>{{ product.price }}</td>
           <td v-on:click.stop="">
-            <button @click="deleteProduct(index)">Delete</button>
+            <button @click="deleteProduct(index)" class="del-btn"></button>
           </td>
         </tr>
       </transition-group>
@@ -133,38 +133,4 @@ export default {
 }
 </script>
 
-<!-- Add "scoped" attribute to limit CSS to this component only -->
-<style scoped>
-.fade-enter-active,
-.fade-leave-active {
-  transition: opacity 0.5s;
-}
 
-.fade-enter,
-.fade-leave-to
-
-/* .fade-leave-active in <2.1.8 */
-  {
-  opacity: 0;
-}
-
-.control-panel{
-  display: flex;
-  flex-direction: column;
-  gap: 1rem;
-  align-items: start;
-}
-
-button{
-  padding: 0.5rem;
-}
-
-div > button{
-  width: 50%;
-  border-radius: 10px;
-}
-
-.item{
-  cursor: pointer;
-}
-</style>
