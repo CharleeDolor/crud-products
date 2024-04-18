@@ -4,7 +4,7 @@
             <div class="modal">
                 <header class="modal-header">
                     <slot name="header">
-                         Add Product
+                        <p style="color: #b34c10;">Add Product</p> 
                     </slot>
                     <button type="button" class="btn-close" @click="closeDefault" aria-label="Close modal">
                         x
