@@ -57,9 +57,10 @@ export default {
   methods: {
     addProduct(newProduct) {
 
-      // check if new product name is an empty string
-      if (newProduct.name == '') {
-        // exit the function, this means that the user just click x button from header of modal
+      // check if new product name is already existing
+      let pos = this.products.findIndex(i => i.name.toLowerCase() == newProduct.name.toLowerCase());
+      if(pos > -1){
+        alert(newProduct.name + " already exists.");
         return;
       }
 
