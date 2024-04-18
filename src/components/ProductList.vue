@@ -1,5 +1,4 @@
 <template>
-<<<<<<< HEAD
   <h1>Products</h1>
   <EditModal v-if="showEdit" @close="closeEditModal" :product="this.toEditProduct" >
   </EditModal>
@@ -27,37 +26,6 @@
         </tr>
       </transition-group>
     </table>
-=======
-  <div id="app">
-    <h1>Products</h1>
-    <EditModal v-if="showEdit" @close="closeEditModal" :product="this.toEditProduct"></EditModal>
-    <AddModal v-if="showAdd" @close="closeAddModal" @closeDefault="closeAddModalDefault"></AddModal>
-
-    <div class="control-panel">
-      <button @click="openAddModal">Add Product</button>
-      <table>
-        <thead>
-          <th>Name</th>
-          <th>Description</th>
-          <th>Price</th>
-          <th>Image</th>
-          <th>Action</th>
-        </thead>
-        <transition-group name="fade">
-          <tr v-for="(product, index) in this.products" :key="product" @click="openEditModal(index, product)"
-            class="item">
-            <td>{{ product.name }}</td>
-            <td>{{ product.desc }}</td>
-            <td>{{ product.price }}</td>
-            <td><img :src="product.image" alt="Product Image" style="width: 100px; height: auto;"></td>
-            <td v-on:click.stop="">
-              <button @click="deleteProduct(index)">Delete</button>
-            </td>
-          </tr>
-        </transition-group>
-      </table>
-    </div>
->>>>>>> ab00b9c6a3939a6159480c9c3af34cb546e28cca
   </div>
 </template>
 
@@ -166,13 +134,4 @@ export default {
 }
 </script>
 
-<<<<<<< HEAD
-=======
-<style scoped>
-/* Your existing styles here... */
-.fade-enter-active,
-.fade-leave-active {
-  transition: opacity 0.5s;
-}
->>>>>>> ab00b9c6a3939a6159480c9c3af34cb546e28cca
 
