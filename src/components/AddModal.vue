@@ -14,16 +14,17 @@
                 <form ref="form" @submit.prevent="animateSave">
                     <section class="modal-body">
                         <div class="modal-group">
-                            <label for="txtName">Name: </label>
+                            <label for="txtName">Name:</label> 
+                            <input class="modal-field" id="txtName" type="text" v-model="name" placeholder="Enter product name" required />
                             <span class="error" v-if="errName.length > 0">{{ errName }}</span>
-                            <input class="modal-field" id="txtName" type="text" v-model="name" required />
                         </div>
 
                         <div class="modal-group">
                             <label for="txtDesc">Description:</label>
+                            <input class="modal-field" id="txtDesc" type="text" v-model="desc" placeholder="Enter product description" required />
                             <span class="error" v-if="errDesc.length > 0">{{ errDesc }}</span>
-                            <input class="modal-field" id="txtDesc" type="text" v-model="desc" required />
                         </div>
+
 
                         <div class="modal-group">
                             <label for="txtPrice">Price:</label>
