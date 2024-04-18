@@ -8,7 +8,7 @@
   <AddModal v-if="showAdd"
   @close="closeAddModal">
   </AddModal>
-
+                      
   <button @click="openAddModal">Add Product</button>
   <table>
     <thead>
@@ -34,6 +34,7 @@
 <script>
 import EditModal from '../components/EditModal.vue'
 import AddModal from '../components/AddModal.vue'
+
 export default {
   name: 'ProductList',
   components:{
@@ -56,7 +57,7 @@ export default {
   methods:{
     addProduct(newProduct){
       this.products.push(newProduct);
-      alert("New product successfully added. ");
+      // alert("New product successfully added. ");
     },
 
     editProduct(product){
@@ -120,4 +121,5 @@ export default {
 .fade-enter, .fade-leave-to /* .fade-leave-active in <2.1.8 */ {
   opacity: 0;
 }
+
 </style>

@@ -8,16 +8,27 @@
                     </slot>
                 </header>
 
-                <form @submit.prevent="handleSubmit">
+                <form ref="form" @submit.prevent="handleSubmit">
                     <section class="modal-body">
-                        <input type="text" v-model="name" required>
-                        <input type="text" v-model="desc" required>
-                        <input type="number" v-model.number="price" required>
+                        <table>
+                            <th>
+                                <tr>
+                                    <td><h3>Name of Products</h3></td>
+                                    <td><h3>Description</h3></td>
+                                    <td><h3>Price</h3></td>
+                                </tr>
+                                <tr>
+                                    <td><input type="text" v-model="name" class="custom-input" required></td>
+                                    <td><input type="text" v-model="desc" class="custom-input" required></td>
+                                    <td><input type="number" v-model.number="price" class="custom-input" required></td>
+                                </tr>
+                            </th>
+                        </table>
                     </section>
 
                     <footer class="modal-footer">
-                        <button type="button" class="btn-green" @click="close">
-                            Save
+                        <button type="button" class="btn-green" @click="animateSave">
+                            <span v-for="(letter, index) in saveText" :key="index" :class="{ 'jump': saveAnimated[index] }">{{ letter }}</span>
                         </button>
                     </footer>
                 </form>
@@ -34,7 +45,9 @@ export default {
         return {
             name: '',
             desc: '',
-            price: 0
+            price: 0,
+            saveText: 'Save',
+            saveAnimated: [false, false, false, false] // Array to track which letters to animate
         }
     },
     methods: {
@@ -46,11 +59,79 @@ export default {
             }
             this.$emit('close', newProduct);
         },
+        handleSubmit() {
+            // Validate form manually
+            if (!this.$refs.form.checkValidity()) {
+                return false; // Prevent form submission
+            }
+
+
+            // Animate the Save button
+            this.saveAnimated = [false, false, false, false]; // Reset animation status
+            setTimeout(() => {
+                this.saveAnimated = [true, true, true, true]; // Trigger animation
+                 // Your form submission logic here
+            }, 5000);
+        },
+        animateSave() {
+            // Animate the Save button
+            this.saveAnimated = [false, false, false, false];
+            this.saveAnimated = [true, true, true, true]; // Trigger animation // Reset animation status
+            setTimeout(() => {
+                let newProduct = {
+                name: this.name,
+                desc: this.desc,
+                price: this.price
+            }
+            this.$emit('close', newProduct);
+                
+                
+            }, 1000);
+    
+        },
+
     },
 };
 </script>
 
 <style>
+@keyframes jumpAnimation {
+    0% { transform: translateY(0); }
+    25% { transform: translateY(-10px); }
+    50% { transform: translateY(0); }
+    75% { transform: translateY(-5px); }
+    100% { transform: translateY(0); }
+}
+
+.jump {
+    animation: jumpAnimation 1s ease;
+}
+
+.btn-green {
+    color: white;
+    background: transparent;
+    border: 1px solid transparent;
+    font-size: 20px;
+    border-radius: 2px;
+    padding: 10px 20px;
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+    outline: none;
+}
+
+.btn-green span {
+    display: inline-block;
+    transition: transform 0.3s ease;
+}
+
+.btn-green:hover span {
+    transform: translateY(-50%);
+}
+.table{
+    display: flex;
+    justify-content: center;
+}
 .modal-backdrop {
     position: fixed;
     top: 0;
@@ -68,7 +149,7 @@ export default {
     box-shadow: 2px 2px 20px 1px;
     overflow-x: auto;
     display: flex;
-    flex-direction: column;
+    justify-content: center;
 }
 
 .modal-header,
@@ -93,6 +174,7 @@ export default {
 .modal-body {
     position: relative;
     padding: 20px 10px;
+    
 }
 
 .btn-close {
@@ -109,7 +191,7 @@ export default {
 }
 
 .btn-green {
-    color: white;
+    color: black;
     background: #4AAE9B;
     border: 1px solid #4AAE9B;
     border-radius: 2px;
@@ -124,4 +206,20 @@ export default {
 .modal-fade-leave-active {
     transition: opacity .5s ease;
 }
+
+.modal-body h3 {
+    margin-bottom: 10px; /* Add margin below headings */
+}
+
+.modal-body input {
+    margin-bottom: 30px; /* Add margin below input fields */
+    justify-content: space-between;
+}
+.custom-input {
+    height: 60px; /* Adjust the height as needed */
+    font-size: 20px;
+    border: none;
+}
+
 </style>
+ 
