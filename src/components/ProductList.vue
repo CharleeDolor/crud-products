@@ -1,4 +1,5 @@
 <template>
+<<<<<<< HEAD
   <h1>Products</h1>
   <EditModal v-if="showEdit" @close="closeEditModal" :product="this.toEditProduct" >
   </EditModal>
@@ -26,9 +27,38 @@
         </tr>
       </transition-group>
     </table>
+=======
+  <div id="app">
+    <h1>Products</h1>
+    <EditModal v-if="showEdit" @close="closeEditModal" :product="this.toEditProduct"></EditModal>
+    <AddModal v-if="showAdd" @close="closeAddModal" @closeDefault="closeAddModalDefault"></AddModal>
+
+    <div class="control-panel">
+      <button @click="openAddModal">Add Product</button>
+      <table>
+        <thead>
+          <th>Name</th>
+          <th>Description</th>
+          <th>Price</th>
+          <th>Image</th>
+          <th>Action</th>
+        </thead>
+        <transition-group name="fade">
+          <tr v-for="(product, index) in this.products" :key="product" @click="openEditModal(index, product)"
+            class="item">
+            <td>{{ product.name }}</td>
+            <td>{{ product.desc }}</td>
+            <td>{{ product.price }}</td>
+            <td><img :src="product.image" alt="Product Image" style="width: 100px; height: auto;"></td>
+            <td v-on:click.stop="">
+              <button @click="deleteProduct(index)">Delete</button>
+            </td>
+          </tr>
+        </transition-group>
+      </table>
+    </div>
+>>>>>>> ab00b9c6a3939a6159480c9c3af34cb546e28cca
   </div>
-
-
 </template>
 
 <script>
@@ -47,19 +77,22 @@ export default {
       showAdd: false,
       toEditProduct: null,
       products: [
-        { name: "product 1", desc: "description 1", price: 12 },
-        { name: "product 2", desc: "description 2", price: 34 },
-        { name: "product 3", desc: "description 3", price: 87 },
+        { name: "Coffee 1", desc: "Cappuccino ", price: 120, image: "" },
+        { name: "Coffee 2", desc: "Cortado", price: 110, image: "" },
+        { name: "Coffee 3", desc: "Red Eye", price: 125, image: "" },
+        { name: "Coffee 4", desc: " Mocha", price: 100, image: "" },
+        { name: "Coffee 5", desc: "Latte", price: 140, image: "" },
       ]
     }
   },
 
   methods: {
+    // Your existing methods here...
     addProduct(newProduct) {
 
       // check if new product name is already existing
       let pos = this.products.findIndex(i => i.name.toLowerCase() == newProduct.name.toLowerCase());
-      if(pos > -1){
+      if (pos > -1) {
         alert(newProduct.name + " already exists.");
         return;
       }
@@ -133,4 +166,13 @@ export default {
 }
 </script>
 
+<<<<<<< HEAD
+=======
+<style scoped>
+/* Your existing styles here... */
+.fade-enter-active,
+.fade-leave-active {
+  transition: opacity 0.5s;
+}
+>>>>>>> ab00b9c6a3939a6159480c9c3af34cb546e28cca
 

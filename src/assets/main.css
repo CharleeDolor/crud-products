@@ -49,7 +49,7 @@
     .fade-enter,
     .fade-leave-to
     
-    /* .fade-leave-active in <2.1.8 */
+   
       {
       opacity: 0;
     }
@@ -309,12 +309,12 @@
 
 table {
   background: #deac76;
-  border-radius: 10px; /* Softening the edges */
+  border-radius: 10px; 
   border-collapse: collapse;
   margin: auto;
   padding: 10px;
   width: 100vh;
-  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2); /* More prominent shadow */
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2); 
   animation: float 5s infinite;
 }
 
@@ -332,11 +332,11 @@ th {
 }
 
 th:first-child {
-  border-top-left-radius: 10px; /* Softening the top left corner */
+  border-top-left-radius: 10px; 
 }
 
 th:last-child {
-  border-top-right-radius: 10px; /* Softening the top right corner */
+  border-top-right-radius: 10px;
   border-right: none;
 }
 
@@ -370,11 +370,11 @@ tr:nth-child(odd):hover td {
 }
 
 tr:last-child td:first-child {
-  border-bottom-left-radius: 20px; /* Softening the bottom left corner */
+  border-bottom-left-radius: 20px; 
 }
 
 tr:last-child td:last-child {
-  border-bottom-right-radius: 20px; /* Softening the bottom right corner */
+  border-bottom-right-radius: 20px;
 }
 
 td {
@@ -394,24 +394,24 @@ td:last-child {
 
 /* Add Icons */
 .add-btn::before {
-  content: "\271A"; /* Plus Icon */
-  font-size: 20px; /* Adjust size as needed */
+  content: "\271A"; 
+  font-size: 20px; 
   display: inline-block;
-  width: 20px; /* Adjust width and height to create a circle */
+  width: 20px; 
   height: 20 px;
-  border-radius: 50%; /* Creates a circle */
+  border-radius: 50%; 
   text-align: center;
-  line-height: 20px; /* Vertically center the plus icon */
-  background-color: #4e3301; /* Change color as needed */
-  color: #fff; /* Change color as needed */
+  line-height: 20px; 
+  background-color: #4e3301; 
+  color: #fff; 
 }
 .add-btn {
   background-color: #a57463; 
-  align-self: flex-end; /* Align the button to the right */
-  padding: 5px 10px; /* Adjust padding */
-  font-size: 20px; /* Adjust font size */
-  width: 200px; /* Adjust width */
-  height: 50px; /* Adjust height */
+  align-self: flex-end; 
+  padding: 5px 10px; 
+  font-size: 20px;
+  width: 200px; 
+  height: 50px;
   box-shadow: rgba(45, 35, 66, 0.4) 0 2px 4px, rgba(45, 35, 66, 0.3) 0 7px 13px -3px, #D6D6E7 0 -3px 0 inset;
 }
  
@@ -428,7 +428,7 @@ td:last-child {
 
 
 .del-btn::before {
-  content: "\1F5D1"; /* Trash Icon */
+  content: "\1F5D1"; 
   display: inline-block;
   font-size: 40px;
   transition: transform 0.5s ease;
