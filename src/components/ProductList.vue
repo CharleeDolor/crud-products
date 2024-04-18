@@ -1,13 +1,10 @@
 <template>
   <h1>Products</h1>
-  <EditModal v-if="showEdit" @close="closeEditModal" :product="this.toEditProduct" >
-  </EditModal>
-
-  <AddModal v-if="showAdd" @close="closeAddModal" @closeDefault="closeAddModalDefault">
-  </AddModal>
-
+  <EditModal v-if="showEdit" @close="closeEditModal" :product="toEditProduct" />
+  <AddModal v-if="showAdd" @close="closeAddModal" @closeDefault="closeAddModalDefault" />
+  
   <div class="control-panel">
-    <button @click="openAddModal"  class="add-btn">    Add Product</button>
+    <button @click="openAddModal" class="add-btn">Add Product</button>
     <table>
       <thead>
         <th>Name</th>
@@ -15,8 +12,8 @@
         <th>Price</th>
         <th>Action</th>
       </thead>
-      <transition-group name="fade">
-        <tr v-for="(product, index) in this.products" :key="product" @click="openEditModal(index, product)" class="item" >
+      <transition-group name="slide">
+        <tr v-for="(product, index) in products" :key="index" @click="openEditModal(index, product)" class="item" v-bind:class="{ 'slide-enter-active': product.animate }">
           <td>{{ product.name }}</td>
           <td>{{ product.desc }}</td>
           <td>{{ product.price }}</td>
@@ -65,6 +62,10 @@ export default {
         return;
       }
 
+      // Add animation flag to the new product
+      newProduct.animate = true;
+
+      // Push the new product into the products array
       this.products.push(newProduct);
     },
 
@@ -134,4 +135,16 @@ export default {
 }
 </script>
 
+<style scoped>
+.slide-enter-active, .slide-leave-active {
+  transition: transform 0.5s ease;
+}
 
+.slide-enter, .slide-leave-to {
+  transform: translateX(0);
+}
+
+.slide-leave, .slide-enter-to {
+  transform: translateX(-100%);
+}
+</style>
