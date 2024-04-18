@@ -83,17 +83,20 @@ export default {
 
             // Animate the Save button
             this.saveAnimated = [false, false, false, false]; // Reset animation status
+            this.saveAnimated = [true, true, true, true]; // Trigger animation
             setTimeout(() => {
-                this.saveAnimated = [true, true, true, true]; // Trigger animation
+               
                     // Your form submission logic here
-            }, 5000);
-
-            let newProduct = {
-                name: this.name,
-                desc: this.desc,
-                price: this.price
+                    let newProduct = {
+                    name: this.name,
+                    desc: this.desc,
+                    price: this.price
             }
+            this.$emit('close', newProduct);
+            }, 1000);
+            
 
+            
             // check if a field is empty 
             if (this.name == '' || this.desc == '' || this.price <= 0) {
                 // Load error message base on what field is empty
@@ -116,7 +119,7 @@ export default {
                 }
                 return;
             }
-            this.$emit('close', newProduct);
+           
 
 
         }
