@@ -10,15 +10,13 @@
 
                 <form @submit.prevent="handleSubmit">
                     <section class="modal-body">
-                        <input type="text" v-model="name" required>
-                        <input type="text" v-model="desc" required>
-                        <input type="number" v-model.number="price" required>
+                        <input class="modal-field" type="text" v-model="name" required/>
+                        <input class="modal-field" type="text" v-model="desc" required/>
+                        <input class="modal-field" type="number" v-model.number="price" required/>
                     </section>
 
                     <footer class="modal-footer">
-                        <button type="button" class="btn-green" @click="close">
-                            Save
-                        </button>
+                        <input type="submit" value="Save" class="btn-green">
                     </footer>
                 </form>
             </div>
@@ -49,6 +47,9 @@ export default {
         }
     },
     methods: {
+        handleSubmit(){
+            this.close();
+        },
         close() {
             let editedProduct = {
                 id: this.product.id,

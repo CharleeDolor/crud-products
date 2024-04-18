@@ -29,4 +29,8 @@ table, th, td {
 td, th{
   padding: 0.5rem;
 }
+
+.modal-field {
+    margin: 1rem;
+}
 </style>

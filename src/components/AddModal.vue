@@ -6,19 +6,24 @@
                     <slot name="header">
                         Add Product
                     </slot>
+                    <button type="button" class="btn-close" @click="close" aria-label="Close modal">
+                        x
+                    </button>
                 </header>
 
                 <form @submit.prevent="handleSubmit">
                     <section class="modal-body">
-                        <input type="text" v-model="name" required>
-                        <input type="text" v-model="desc" required>
-                        <input type="number" v-model.number="price" required>
+                        <input class="modal-field" type="text" placeholder="Product Name" v-model="name" required />
+                        <input class="modal-field" type="text" placeholder="Description" v-model="desc" required />
+                        <div>
+                            <label for="txtPrice">Price:</label>
+                            <input class="modal-field" type="number" step="0.01" id="txtPrice" v-model.number="price" required />
+                        </div>
+
                     </section>
 
                     <footer class="modal-footer">
-                        <button type="button" class="btn-green" @click="close">
-                            Save
-                        </button>
+                        <input type="submit" class="btn-green" value="Save">
                     </footer>
                 </form>
             </div>
@@ -38,6 +43,15 @@ export default {
         }
     },
     methods: {
+        handleSubmit() {
+
+            // Validation for price
+            if (this.price <= 0) {
+                alert("Invalid Price");
+                return;
+            }
+            this.close();
+        },
         close() {
             let newProduct = {
                 name: this.name,
@@ -93,6 +107,8 @@ export default {
 .modal-body {
     position: relative;
     padding: 20px 10px;
+    display: flex;
+    flex-direction: column;
 }
 
 .btn-close {
@@ -123,5 +139,9 @@ export default {
 .modal-fade-enter-active,
 .modal-fade-leave-active {
     transition: opacity .5s ease;
+}
+
+div .modal-field{
+    margin-left: 0.2rem;
 }
 </style>
