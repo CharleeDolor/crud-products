@@ -43,15 +43,6 @@ export default {
         }
     },
     methods: {
-        handleSubmit() {
-
-            // Validation for price
-            if (this.price <= 0) {
-                alert("Invalid Price");
-                return;
-            }
-            this.close();
-        },
         close() {
             let newProduct = {
                 name: this.name,
