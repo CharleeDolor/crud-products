@@ -2,7 +2,7 @@
   <h1>Products</h1>
   <EditModal v-if="showEdit" @close="closeEditModal" :product="toEditProduct" />
   <AddModal v-if="showAdd" @close="closeAddModal" @closeDefault="closeAddModalDefault" />
-  
+
   <div class="control-panel">
     <button @click="openAddModal" class="add-btn">Add Product</button>
     <table>
@@ -12,13 +12,14 @@
         <th>Price</th>
         <th>Action</th>
       </thead>
-      <transition-group name="slide">
-        <tr v-for="(product, index) in products" :key="index" @click="openEditModal(index, product)" class="item" v-bind:class="{ 'slide-enter-active': product.animate }">
+      <transition-group name="fade">
+        <tr v-for="(product, index) in products" :key="product" @click="openEditModal(index, product)" class="item"
+          v-bind:class="{ 'fade-enter-active': product.animate }">
           <td>{{ product.name }}</td>
           <td>{{ product.desc }}</td>
           <td>{{ product.price }}</td>
           <td v-on:click.stop="">
-            <button @click="deleteProduct(index)" class="del-btn"></button>
+            <button @click="deleteProduct(product, index)" class="del-btn"></button>
           </td>
         </tr>
       </transition-group>
@@ -93,12 +94,13 @@ export default {
       alert("Edit saved");
     },
 
-    deleteProduct(index) {
+    deleteProduct(product, index) {
       let currentProduct = this.products[index];
       let conf = confirm("Are you sure to delete " + currentProduct.name + "?");
 
       if (conf) {
         this.products.splice(index, 1);
+        alert("Product " + product.name + " is removed");
       }
     },
 
@@ -136,15 +138,29 @@ export default {
 </script>
 
 <style scoped>
-.slide-enter-active, .slide-leave-active {
+.slide-enter-active,
+.slide-leave-active {
   transition: transform 0.5s ease;
 }
 
-.slide-enter, .slide-leave-to {
+.slide-enter,
+.slide-leave-to {
   transform: translateX(0);
 }
 
-.slide-leave, .slide-enter-to {
+.slide-leave,
+.slide-enter-to {
   transform: translateX(-100%);
+}
+
+/* Product List */
+.fade-enter-active,
+.fade-leave-active {
+  transition: opacity 0.5s;
+}
+
+.fade-enter-from,
+.fade-leave-to {
+  opacity: 0;
 }
 </style>
