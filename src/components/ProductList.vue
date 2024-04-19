@@ -12,9 +12,9 @@
         <th>Price</th>
         <th>Action</th>
       </thead>
-      <transition-group name="fade">
+      <transition-group name="slide">
         <tr v-for="(product, index) in products" :key="product" @click="openEditModal(index, product)" class="item"
-          v-bind:class="{ 'fade-enter-active': product.animate }">
+          v-bind:class="{ 'slide-enter-active': product.animate }">
           <td>{{ product.name }}</td>
           <td>{{ product.desc }}</td>
           <td>{{ product.price }}</td>
@@ -144,27 +144,14 @@ export default {
 <style scoped>
 .slide-enter-active,
 .slide-leave-active {
-  transition: transform 0.5s ease;
+  transition: transform 1s ease;
 }
 
-.slide-enter,
-.slide-leave-to {
-  transform: translateX(0);
+.slide-enter-from {
+  transform: translate(100%, 0);
 }
 
-.slide-leave,
-.slide-enter-to {
-  transform: translateX(-100%);
-}
-
-/* Product List */
-.fade-enter-active,
-.fade-leave-active {
-  transition: opacity 0.5s;
-}
-
-.fade-enter-from,
-.fade-leave-to {
-  opacity: 0;
+.slide-leave-to{
+  transform: translate(-100%, 0);
 }
 </style>
