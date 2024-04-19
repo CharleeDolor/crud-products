@@ -143,7 +143,7 @@ export default {
 }
 
 .background-image {
-  position: fixed; /* Change to fixed to make it cover the entire viewport */
+  position: fixed;
   top: 0;
   left: 0;
   width: 100%;
@@ -152,7 +152,9 @@ export default {
   background-size: cover;
   background-position: center;
   z-index: -1;
+  filter: blur(3px); /* Adjust the blur intensity as needed */
 }
+
 
 .slide-enter-active,
 .slide-leave-active {
