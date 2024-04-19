@@ -68,8 +68,8 @@ export default {
       // Add animation flag to the new product
       newProduct.animate = true;
 
-      // Push the new product into the products array
-      this.products.push(newProduct);
+      // Push the new product in first index into the products array
+      this.products.unshift(newProduct);
     },
 
     editProduct(product) {
