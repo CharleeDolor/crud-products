@@ -1,31 +1,34 @@
 <template>
-   <img :src="require('@/assets/kapelogo.png')" alt="Coffee Shop Logo" class="imglog">
+  <div class="container">
+    <div class="background-image"></div>
+    <img :src="require('@/assets/kapelogo.png')" alt="Coffee Shop Logo" class="imglog">
 
-  <EditModal v-if="showEdit" @close="closeEditModal" @closeDefault="closeEditModalDefault" :product="toEditProduct" />
-  <AddModal v-if="showAdd" @close="closeAddModal" @closeDefault="closeAddModalDefault" />
+    <EditModal v-if="showEdit" @close="closeEditModal" @closeDefault="closeEditModalDefault" :product="toEditProduct" />
+    <AddModal v-if="showAdd" @close="closeAddModal" @closeDefault="closeAddModalDefault" />
 
-  <div class="control-panel">
-    <button @click="openAddModal" class="add-btn">Add Product</button>
-    <table v-if="this.products.length > 0">
-      <thead>
-        <th>Name</th>
-        <th>Description</th>
-        <th>Price</th>
-        <th>Action</th>
-      </thead>
-      <transition-group name="slide">
-        <tr v-for="(product, index) in products" :key="product" @click="openEditModal(index, product)" class="item"
-          v-bind:class="{ 'slide-enter-active': product.animate }">
-          <td>{{ product.name }}</td>
-          <td>{{ product.desc }}</td>
-          <td>{{ product.price }}</td>
-          <td v-on:click.stop="">
-            <button @click="deleteProduct(product, index)" class="del-btn"></button>
-          </td>
-        </tr>
-      </transition-group>
-    </table>
-    <h2 v-else style="align-self: center;">Empty</h2>
+    <div class="control-panel">
+      <button @click="openAddModal" class="add-btn">Add Product</button>
+      <table v-if="this.products.length > 0">
+        <thead>
+          <th>Name</th>
+          <th>Description</th>
+          <th>Price</th>
+          <th>Action</th>
+        </thead>
+        <transition-group name="slide">
+          <tr v-for="(product, index) in products" :key="product" @click="openEditModal(index, product)" class="item"
+            v-bind:class="{ 'slide-enter-active': product.animate }">
+            <td>{{ product.name }}</td>
+            <td>{{ product.desc }}</td>
+            <td>{{ product.price }}</td>
+            <td v-on:click.stop="">
+              <button @click="deleteProduct(product, index)" class="del-btn"></button>
+            </td>
+          </tr>
+        </transition-group>
+      </table>
+      <h2 v-else style="align-self: center;">Empty</h2>
+    </div>
   </div>
 </template>
 
@@ -57,17 +60,14 @@ export default {
   methods: {
     // Your existing methods here...
     addProduct(newProduct) {
-
       // check if new product name is already existing
       let pos = this.products.findIndex(i => i.name.toLowerCase() == newProduct.name.toLowerCase());
       if (pos > -1) {
         alert(newProduct.name + " already exists.");
         return;
       }
-
       // Add animation flag to the new product
       newProduct.animate = true;
-
       // Push the new product in first index into the products array
       this.products.unshift(newProduct);
     },
@@ -75,19 +75,15 @@ export default {
     editProduct(product) {
       let id = product.id;
       delete product.id;
-
       // VALIDATIONS
       // check for duplicate product name by getting the index of product name
       var pos = this.products.findIndex(i => i.name.toLowerCase() === product.name.toLowerCase());
-
       // if pos value is not equal to -1, this means that this product name already exist
       if (pos != -1 && pos != id) {
         alert("Cannot rename to " + product.name + ". It is already existing.");
         return;
       }
-
       let index = this.products.map(e => e.name).indexOf(product.name);
-
       if (index != id && index != -1) {
         alert("Product name for " + product.name + " is already exist");
         return;
@@ -99,7 +95,6 @@ export default {
     deleteProduct(product, index) {
       let currentProduct = this.products[index];
       let conf = confirm("Are you sure to delete " + currentProduct.name + "?");
-
       if (conf) {
         this.products.splice(index, 1);
         alert("Product " + product.name + " is removed");
@@ -109,7 +104,6 @@ export default {
     // --------------------------- open and close modal methods --------------------------- \\
     openEditModal(index, product) {
       this.showEdit = true;
-
       // creating product payload array with id array key with the value of index
       product.id = index;
       this.toEditProduct = product;
@@ -118,7 +112,6 @@ export default {
     closeEditModal(product) {
       this.showEdit = false;
       this.editProduct(product);
-
     },
 
     openAddModal() {
@@ -129,7 +122,6 @@ export default {
       this.showAdd = false;
       // call addProduct method
       this.addProduct(newProduct);
-
     },
 
     closeAddModalDefault() {
@@ -144,6 +136,24 @@ export default {
 </script>
 
 <style scoped>
+.container {
+  position: relative;
+  width: 100%;
+  height: 100vh;
+}
+
+.background-image {
+  position: fixed; /* Change to fixed to make it cover the entire viewport */
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: url('https://antdisplay.com/pub/media/wysiwyg/64.jpg');
+  background-size: cover;
+  background-position: center;
+  z-index: -1;
+}
+
 .slide-enter-active,
 .slide-leave-active {
   transition: transform 1s ease;
@@ -153,10 +163,11 @@ export default {
   transform: translate(100%, 0);
 }
 
-.slide-leave-to{
+.slide-leave-to {
   transform: translate(-100%, 0);
 }
-.imglog{
+
+.imglog {
   height: 300px;
   margin-top: -100px;
 }
