@@ -394,7 +394,6 @@ td:last-child {
   color: #fff; 
 }
 .add-btn {
-  position: sticky;
   top: 10px;
   background-color: #a57463; 
   align-self: flex-end; 
