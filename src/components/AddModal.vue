@@ -4,7 +4,7 @@
             <div class="modal">
                 <header class="modal-header">
                     <slot name="header">
-                         Add Product
+                        <p class="header-title">Add Product</p>
                     </slot>
                     <button type="button" class="btn-close" @click="closeDefault" aria-label="Close modal">
                         x
@@ -78,10 +78,6 @@ export default {
         },
 
         animateSave() {
-            // Validate form manually
-            // if (!this.$refs.form.checkValidity()) {
-            //     return false; // Prevent form submission
-            // }
 
             // Animate the Save button
             this.saveAnimated = [false, false, false, false]; // Reset animation status

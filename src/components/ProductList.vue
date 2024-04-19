@@ -1,6 +1,6 @@
 <template>
   <h1>Products</h1>
-  <EditModal v-if="showEdit" @close="closeEditModal" :product="toEditProduct" />
+  <EditModal v-if="showEdit" @close="closeEditModal" @closeDefault="closeEditModalDefault" :product="toEditProduct" />
   <AddModal v-if="showAdd" @close="closeAddModal" @closeDefault="closeAddModalDefault" />
 
   <div class="control-panel">
@@ -132,6 +132,10 @@ export default {
 
     closeAddModalDefault() {
       this.showAdd = false;
+    },
+
+    closeEditModalDefault() {
+      this.showEdit = false;
     }
   }
 }

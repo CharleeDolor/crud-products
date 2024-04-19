@@ -4,8 +4,11 @@
             <div class="modal">
                 <header class="modal-header">
                     <slot name="header">
-                        Edit Product
+                        <p class="header-title">Edit Product</p>
                     </slot>
+                    <button type="button" class="btn-close" @click="closeDefault" aria-label="Close modal">
+                        x
+                    </button>
                 </header>
 
                 <form @submit.prevent="handleSubmit">
@@ -30,7 +33,7 @@
                     </section>
 
                     <footer class="modal-footer">
-                        <input type="submit" value="Save" class="btn-green">
+                        <input type="submit" value="Save" class="btn-save">
                     </footer>
                 </form>
             </div>
@@ -73,6 +76,10 @@ export default {
             }
             this.$emit('close', editedProduct);
         },
+
+        closeDefault(){
+            this.$emit('closeDefault');
+        }
     },
 };
 </script>
