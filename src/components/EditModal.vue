@@ -60,8 +60,7 @@ export default {
         return {
             name: '',
             desc: '',
-            price: 0,
-            saveAnimated: [false, false, false, false], // Array to track which letters to animate
+            price: 0
         }
     },
     methods: {
@@ -81,22 +80,7 @@ export default {
         closeDefault(){
             this.$emit('closeDefault');
         },
-        animateSave(){
-             // Animate the Save button
-             this.saveAnimated = [false, false, false, false]; // Reset animation status
-            this.saveAnimated = [true, true, true, true]; // Trigger animation
-
-            setTimeout(() =>{
-                let editedProduct = {
-                id: this.product.id,
-                name: this.name,
-                desc: this.desc,
-                price: this.price
-            }
-            this.$emit('close', editedProduct);
-            }, 1000);
-        }
-    },
+    }
 };
 </script>
 
