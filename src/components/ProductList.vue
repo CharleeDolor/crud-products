@@ -46,10 +46,10 @@ export default {
       toEditProduct: null,
       products: [
         { name: "Coffee 1", desc: "Cappuccino ", price: 120, image: "" },
-        // { name: "Coffee 2", desc: "Cortado", price: 110, image: "" },
-        // { name: "Coffee 3", desc: "Red Eye", price: 125, image: "" },
-        // { name: "Coffee 4", desc: " Mocha", price: 100, image: "" },
-        // { name: "Coffee 5", desc: "Latte", price: 140, image: "" },
+        { name: "Coffee 2", desc: "Cortado", price: 110, image: "" },
+        { name: "Coffee 3", desc: "Red Eye", price: 125, image: "" },
+        { name: "Coffee 4", desc: " Mocha", price: 100, image: "" },
+        { name: "Coffee 5", desc: "Latte", price: 140, image: "" },
       ]
     }
   },
