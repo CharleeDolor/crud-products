@@ -1,5 +1,6 @@
 <template>
-  <h1>Products</h1>
+   <img :src="require('@/assets/kapelogo.png')" alt="Coffee Shop Logo" class="imglog">
+
   <EditModal v-if="showEdit" @close="closeEditModal" @closeDefault="closeEditModalDefault" :product="toEditProduct" />
   <AddModal v-if="showAdd" @close="closeAddModal" @closeDefault="closeAddModalDefault" />
 
@@ -166,5 +167,9 @@ export default {
 .fade-enter-from,
 .fade-leave-to {
   opacity: 0;
+}
+.imglog{
+  height: 300px;
+  margin-top: -100px;
 }
 </style>
